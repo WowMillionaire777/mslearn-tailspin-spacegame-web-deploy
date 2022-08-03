@@ -111,7 +111,7 @@ stages:
             inputs:
               azureSubscription: 'Resource Manager-Tailspin-Space Game'
               appName: '$(WebAppNameTest)'
-              appType: webAppLinu
+              appType: webAppLinux
               package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
   - job: RunUITests
     dependsOn: Deploy
