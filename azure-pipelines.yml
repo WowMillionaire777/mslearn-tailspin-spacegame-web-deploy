@@ -86,7 +86,7 @@ stages:
             displayName: 'Azure App Service Deploy: website'
             inputs:
               azureSubscription: 'Resource-Manager-Tailspin-Space-Game'
-              appName: '$(WebAppNameDev)'
+              appName: 'tailspin-space-game-web-dev-15122.azurewebsites.net'
               appType: webAppLinux
               package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
   
@@ -110,7 +110,7 @@ stages:
             displayName: 'Azure App Service Deploy: website'
             inputs:
               azureSubscription: 'Resource-Manager-Tailspin-Space-Game'
-              appName: '$(WebAppNameTest)'
+              appName: 'tailspin-space-game-web-test-15122.azurewebsites.net'
               appType: webAppLinux
               package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
   - job: RunUITests
@@ -159,6 +159,6 @@ stages:
             displayName: 'Azure App Service Deploy: website'
             inputs:
               azureSubscription: 'Resource-Manager-Tailspin-Space-Game'
-              appName: '$(WebAppNameStaging)'
+              appName: 'tailspin-space-game-web-staging-15122.azurewebsites.net'
               appType: webAppLinux
               package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
