@@ -1,9 +1,9 @@
 trigger:
-- '*'
-
+  - '*'
+  
 variables:
-  buildConfiguration: 'Release'
-
+    buildConfiguration: 'Release'
+  
 stages:
 - stage: 'Build'
   displayName: 'Build the web application'
@@ -17,14 +17,14 @@ stages:
 
     variables:
       wwwrootDir: 'Tailspin.SpaceGame.Web/wwwroot'
-      dotnetSdkVersion: '5.x'
-
+      dotnetSdkVersion: '6.x'
+  
     steps:
     - task: UseDotNet@2
       displayName: 'Use .NET SDK $(dotnetSdkVersion)'
       inputs:
         version: '$(dotnetSdkVersion)'
-
+  
     - task: Npm@1
       displayName: 'Run npm install'
       inputs:
@@ -64,7 +64,7 @@ stages:
 
     - publish: '$(Build.ArtifactStagingDirectory)'
       artifact: drop
-
+  
 - stage: 'Dev'
   displayName: 'Deploy to the dev environment'
   dependsOn: Build
@@ -87,7 +87,7 @@ stages:
               azureSubscription: 'Resource Manager - Tailspin - Space Game'
               appName: '$(WebAppNameDev)'
               package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
-
+  
 - stage: 'Test'
   displayName: 'Deploy to the test environment'
   dependsOn: Dev
@@ -110,7 +110,7 @@ stages:
               azureSubscription: 'Resource Manager - Tailspin - Space Game'
               appName: '$(WebAppNameTest)'
               package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
-
+  
 - stage: 'Staging'
   displayName: 'Deploy to the staging environment'
   dependsOn: Test
@@ -133,7 +133,6 @@ stages:
               azureSubscription: 'Resource Manager - Tailspin - Space Game'
               appName: '$(WebAppNameStaging)'
               package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
-
   - job: RunLoadTests
     dependsOn: Deploy
     displayName: 'Run load tests'
